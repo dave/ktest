@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"kego.io/kerr"
+	"github.com/davelondon/kerr"
 )
 
 func TestIsError(t *testing.T) {

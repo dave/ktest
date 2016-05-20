@@ -15,9 +15,11 @@ import (
 	"unicode/utf8"
 
 	"github.com/davecgh/go-spew/spew"
+	"github.com/davelondon/kerr"
 	"github.com/pmezard/go-difflib/difflib"
-	"kego.io/kerr"
 )
+
+func SkipError(string) {}
 
 // TestingT is an interface wrapper around *testing.T
 type TestingT interface {
