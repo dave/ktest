@@ -16,6 +16,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/pmezard/go-difflib/difflib"
+	"kego.io/kerr"
 )
 
 // TestingT is an interface wrapper around *testing.T
@@ -1002,4 +1003,37 @@ func diff(expected interface{}, actual interface{}) string {
 	})
 
 	return "\n\nDiff:\n" + diff
+}
+
+// IsError works with the kerr package to test for a specific error
+func IsError(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) bool {
+
+	message := messageFromMsgAndArgs(msgAndArgs...)
+	if !NotNil(t, theError, "An error is expected but got nil. %s", message) {
+		return false
+	}
+	i, ok := theError.(kerr.Interface)
+	if !True(t, ok, "Error should implement kerr.Interface", message) {
+		return false
+	}
+	return Equal(t, expectedId, i.ErrorId(), "Expected %s but got %s. %s:\n%s", expectedId, i.ErrorId(), message, theError)
+
+}
+
+// HasError works with the kerr package to test for a specific error on the error stack
+func HasError(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) bool {
+	message := messageFromMsgAndArgs(msgAndArgs...)
+	if !NotNil(t, theError, "An error is expected but got nil. %s", message) {
+		return false
+	}
+	i, ok := theError.(kerr.Interface)
+	if !True(t, ok, "Error should be kerr.Interface", message) {
+		return false
+	}
+	for _, i := range i.ErrorStack() {
+		if i == expectedId {
+			return true
+		}
+	}
+	return Fail(t, fmt.Sprintf("Didn't find error %s on stack:\n%s", expectedId, theError), msgAndArgs...)
 }

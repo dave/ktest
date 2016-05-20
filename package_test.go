@@ -1,8 +1,9 @@
-package testify
+package ktest
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/davelondon/ktest/assert"
 )
 
 func TestImports(t *testing.T) {

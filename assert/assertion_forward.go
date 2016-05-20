@@ -1,11 +1,13 @@
 /*
-* CODE GENERATED AUTOMATICALLY WITH github.com/stretchr/testify/_codegen
+* CODE GENERATED AUTOMATICALLY WITH github.com/davelondon/ktest/_codegen
 * THIS FILE MUST NOT BE EDITED BY HAND
  */
 
 package assert
 
-import time "time"
+import (
+	time "time"
+)
 
 // Condition uses a Comparison to assert a complex condition.
 func (a *Assertions) Condition(comp Comparison, msgAndArgs ...interface{}) bool {
@@ -106,6 +108,11 @@ func (a *Assertions) False(value bool, msgAndArgs ...interface{}) bool {
 	return False(a.t, value, msgAndArgs...)
 }
 
+// HasError works with the kerr package to test for a specific error on the error stack
+func (a *Assertions) HasError(theError error, expectedId string, msgAndArgs ...interface{}) bool {
+	return HasError(a.t, theError, expectedId, msgAndArgs...)
+}
+
 // Implements asserts that an object is implemented by the specified interface.
 //
 //    a.Implements((*MyInterface)(nil), new(MyObject), "MyObject")
@@ -134,9 +141,14 @@ func (a *Assertions) InEpsilon(expected interface{}, actual interface{}, epsilon
 	return InEpsilon(a.t, expected, actual, epsilon, msgAndArgs...)
 }
 
-// InEpsilonSlice is the same as InEpsilon, except it compares two slices.
-func (a *Assertions) InEpsilonSlice(expected interface{}, actual interface{}, delta float64, msgAndArgs ...interface{}) bool {
-	return InEpsilonSlice(a.t, expected, actual, delta, msgAndArgs...)
+// InEpsilonSlice is the same as InEpsilon, except it compares each value from two slices.
+func (a *Assertions) InEpsilonSlice(expected interface{}, actual interface{}, epsilon float64, msgAndArgs ...interface{}) bool {
+	return InEpsilonSlice(a.t, expected, actual, epsilon, msgAndArgs...)
+}
+
+// IsError works with the kerr package to test for a specific error
+func (a *Assertions) IsError(theError error, expectedId string, msgAndArgs ...interface{}) bool {
+	return IsError(a.t, theError, expectedId, msgAndArgs...)
 }
 
 // IsType asserts that the specified objects are of the same type.

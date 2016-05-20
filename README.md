@@ -1,7 +1,13 @@
-Testify - Thou Shalt Write Tests
-================================
+ktest
+==============================
 
-[![Build Status](https://travis-ci.org/stretchr/testify.svg)](https://travis-ci.org/stretchr/testify)
+Forked from github.com/stretchr/testify
+
+
+ktest - Thou Shalt Write Tests
+==============================
+
+[![Build Status](https://travis-ci.org/davelondon/ktest.svg)](https://travis-ci.org/davelondon/ktest)
 
 Go code (golang) set of packages that provide many tools for testifying that your code will behave as you intend.
 
@@ -14,15 +20,15 @@ Features include:
 
 Get started:
 
-  * Install testify with [one line of code](#installation), or [update it with another](#staying-up-to-date)
+  * Install ktest with [one line of code](#installation), or [update it with another](#staying-up-to-date)
   * For an introduction to writing test code in Go, see http://golang.org/doc/code.html#Testing
-  * Check out the API Documentation http://godoc.org/github.com/stretchr/testify
+  * Check out the API Documentation http://godoc.org/github.com/davelondon/ktest
   * To make your testing life easier, check out our other project, [gorc](http://github.com/stretchr/gorc)
   * A little about [Test-Driven Development (TDD)](http://en.wikipedia.org/wiki/Test-driven_development)
 
 
 
-[`assert`](http://godoc.org/github.com/stretchr/testify/assert "API documentation") package
+[`assert`](http://godoc.org/github.com/davelondon/ktest/assert "API documentation") package
 -------------------------------------------------------------------------------------------
 
 The `assert` package provides some helpful methods that allow you to write better test code in Go.
@@ -38,7 +44,7 @@ package yours
 
 import (
   "testing"
-  "github.com/stretchr/testify/assert"
+  "github.com/davelondon/ktest/assert"
 )
 
 func TestSomething(t *testing.T) {
@@ -74,7 +80,7 @@ package yours
 
 import (
   "testing"
-  "github.com/stretchr/testify/assert"
+  "github.com/davelondon/ktest/assert"
 )
 
 func TestSomething(t *testing.T) {
@@ -99,34 +105,26 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-[`require`](http://godoc.org/github.com/stretchr/testify/require "API documentation") package
+[`require`](http://godoc.org/github.com/davelondon/ktest/require "API documentation") package
 ---------------------------------------------------------------------------------------------
 
 The `require` package provides same global functions as the `assert` package, but instead of returning a boolean result they terminate current test.
 
 See [t.FailNow](http://golang.org/pkg/testing/#T.FailNow) for details.
 
-
-[`http`](http://godoc.org/github.com/stretchr/testify/http "API documentation") package
----------------------------------------------------------------------------------------
-
-The `http` package contains test objects useful for testing code that relies on the `net/http` package.  Check out the [(deprecated) API documentation for the `http` package](http://godoc.org/github.com/stretchr/testify/http).
-
-We recommend you use [httptest](http://golang.org/pkg/net/http/httptest) instead.
-
-[`mock`](http://godoc.org/github.com/stretchr/testify/mock "API documentation") package
+[`mock`](http://godoc.org/github.com/davelondon/ktest/mock "API documentation") package
 ----------------------------------------------------------------------------------------
 
 The `mock` package provides a mechanism for easily writing mock objects that can be used in place of real objects when writing test code.
 
-An example test function that tests a piece of code that relies on an external object `testObj`, can setup expectations (testify) and assert that they indeed happened:
+An example test function that tests a piece of code that relies on an external object `testObj`, can setup expectations (ktest) and assert that they indeed happened:
 
 ```go
 package yours
 
 import (
   "testing"
-  "github.com/stretchr/testify/mock"
+  "github.com/davelondon/ktest/mock"
 )
 
 /*
@@ -176,115 +174,30 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-For more information on how to write mock code, check out the [API documentation for the `mock` package](http://godoc.org/github.com/stretchr/testify/mock).
+For more information on how to write mock code, check out the [API documentation for the `mock` package](http://godoc.org/github.com/davelondon/ktest/mock).
 
 You can use the [mockery tool](http://github.com/vektra/mockery) to autogenerate the mock code against an interface as well, making using mocks much quicker.
-
-[`suite`](http://godoc.org/github.com/stretchr/testify/suite "API documentation") package
------------------------------------------------------------------------------------------
-
-The `suite` package provides functionality that you might be used to from more common object oriented languages.  With it, you can build a testing suite as a struct, build setup/teardown methods and testing methods on your struct, and run them with 'go test' as per normal.
-
-An example suite is shown below:
-
-```go
-// Basic imports
-import (
-    "testing"
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/suite"
-)
-
-// Define the suite, and absorb the built-in basic suite
-// functionality from testify - including a T() method which
-// returns the current testing context
-type ExampleTestSuite struct {
-    suite.Suite
-    VariableThatShouldStartAtFive int
-}
-
-// Make sure that VariableThatShouldStartAtFive is set to five
-// before each test
-func (suite *ExampleTestSuite) SetupTest() {
-    suite.VariableThatShouldStartAtFive = 5
-}
-
-// All methods that begin with "Test" are run as tests within a
-// suite.
-func (suite *ExampleTestSuite) TestExample() {
-    assert.Equal(suite.T(), 5, suite.VariableThatShouldStartAtFive)
-}
-
-// In order for 'go test' to run this suite, we need to create
-// a normal test function and pass our suite to suite.Run
-func TestExampleTestSuite(t *testing.T) {
-    suite.Run(t, new(ExampleTestSuite))
-}
-```
-
-For a more complete example, using all of the functionality provided by the suite package, look at our [example testing suite](https://github.com/stretchr/testify/blob/master/suite/suite_test.go)
-
-For more information on writing suites, check out the [API documentation for the `suite` package](http://godoc.org/github.com/stretchr/testify/suite).
-
-`Suite` object has assertion methods:
-
-```go
-// Basic imports
-import (
-    "testing"
-    "github.com/stretchr/testify/suite"
-)
-
-// Define the suite, and absorb the built-in basic suite
-// functionality from testify - including assertion methods.
-type ExampleTestSuite struct {
-    suite.Suite
-    VariableThatShouldStartAtFive int
-}
-
-// Make sure that VariableThatShouldStartAtFive is set to five
-// before each test
-func (suite *ExampleTestSuite) SetupTest() {
-    suite.VariableThatShouldStartAtFive = 5
-}
-
-// All methods that begin with "Test" are run as tests within a
-// suite.
-func (suite *ExampleTestSuite) TestExample() {
-    suite.Equal(suite.VariableThatShouldStartAtFive, 5)
-}
-
-// In order for 'go test' to run this suite, we need to create
-// a normal test function and pass our suite to suite.Run
-func TestExampleTestSuite(t *testing.T) {
-    suite.Run(t, new(ExampleTestSuite))
-}
-```
-
-------
 
 Installation
 ============
 
-To install Testify, use `go get`:
+To install ktest, use `go get`:
 
-    * Latest version: go get github.com/stretchr/testify
-    * Specific version: go get gopkg.in/stretchr/testify.v1
+    * Latest version: go get github.com/davelondon/ktest
 
 This will then make the following packages available to you:
 
-    github.com/stretchr/testify/assert
-    github.com/stretchr/testify/mock
-    github.com/stretchr/testify/http
+    github.com/davelondon/ktest/assert
+    github.com/davelondon/ktest/mock
 
-Import the `testify/assert` package into your code using this template:
+Import the `ktest/assert` package into your code using this template:
 
 ```go
 package yours
 
 import (
   "testing"
-  "github.com/stretchr/testify/assert"
+  "github.com/davelondon/ktest/assert"
 )
 
 func TestSomething(t *testing.T) {
@@ -299,7 +212,7 @@ func TestSomething(t *testing.T) {
 Staying up to date
 ==================
 
-To update Testify to the latest version, use `go get -u github.com/stretchr/testify`.
+To update ktest to the latest version, use `go get -u github.com/davelondon/ktest`.
 
 ------
 
@@ -315,7 +228,7 @@ Contributing
 
 Please feel free to submit issues, fork the repository and send pull requests!
 
-When submitting an issue, we ask that you please include a complete test function that demonstrates the issue.  Extra credit for those using Testify to write the test code that demonstrates it.
+When submitting an issue, we ask that you please include a complete test function that demonstrates the issue.  Extra credit for those using ktest to write the test code that demonstrates it.
 
 ------
 

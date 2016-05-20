@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/davelondon/ktest/assert"
 	"github.com/stretchr/objx"
-	"github.com/stretchr/testify/assert"
 )
 
 // TestingT is an interface wrapper around *testing.T
@@ -167,14 +167,14 @@ type Mock struct {
 	// Holds the calls that were made to this mocked object.
 	Calls []Call
 
-	// TestData holds any data that might be useful for testing.  Testify ignores
+	// TestData holds any data that might be useful for testing.  ktest ignores
 	// this data completely allowing you to do whatever you like with it.
 	testData objx.Map
 
 	mutex sync.Mutex
 }
 
-// TestData holds any data that might be useful for testing.  Testify ignores
+// TestData holds any data that might be useful for testing.  ktest ignores
 // this data completely allowing you to do whatever you like with it.
 func (m *Mock) TestData() objx.Map {
 
