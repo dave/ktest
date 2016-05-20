@@ -1007,6 +1007,11 @@ func diff(expected interface{}, actual interface{}) string {
 	return "\n\nDiff:\n" + diff
 }
 
+// IsError works with the kerr package to test for a specific error, but the error is expected to come from an external package so tooling shouldn't expect to find the error thrown.
+func IsErrorExternal(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) bool {
+	return IsError(t, theError, expectedId, msgAndArgs...)
+}
+
 // IsError works with the kerr package to test for a specific error
 func IsError(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) bool {
 
@@ -1020,6 +1025,11 @@ func IsError(t TestingT, theError error, expectedId string, msgAndArgs ...interf
 	}
 	return Equal(t, expectedId, i.ErrorId(), "Expected %s but got %s. %s:\n%s", expectedId, i.ErrorId(), message, theError)
 
+}
+
+// HasError works with the kerr package to test for a specific error on the error stack, but the error is expected to come from an external package so tooling shouldn't expect to find the error thrown.
+func HasErrorExternal(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) bool {
+	return HasError(t, theError, expectedId, msgAndArgs...)
 }
 
 // HasError works with the kerr package to test for a specific error on the error stack

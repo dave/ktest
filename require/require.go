@@ -139,6 +139,13 @@ func HasError(t TestingT, theError error, expectedId string, msgAndArgs ...inter
 	}
 }
 
+// HasError works with the kerr package to test for a specific error on the error stack, but the error is expected to come from an external package so tooling shouldn't expect to find the error thrown.
+func HasErrorExternal(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) {
+	if !assert.HasErrorExternal(t, theError, expectedId, msgAndArgs...) {
+		t.FailNow()
+	}
+}
+
 // Implements asserts that an object is implemented by the specified interface.
 //
 //    assert.Implements(t, (*MyInterface)(nil), new(MyObject), "MyObject")
@@ -185,6 +192,13 @@ func InEpsilonSlice(t TestingT, expected interface{}, actual interface{}, epsilo
 // IsError works with the kerr package to test for a specific error
 func IsError(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) {
 	if !assert.IsError(t, theError, expectedId, msgAndArgs...) {
+		t.FailNow()
+	}
+}
+
+// IsError works with the kerr package to test for a specific error, but the error is expected to come from an external package so tooling shouldn't expect to find the error thrown.
+func IsErrorExternal(t TestingT, theError error, expectedId string, msgAndArgs ...interface{}) {
+	if !assert.IsErrorExternal(t, theError, expectedId, msgAndArgs...) {
 		t.FailNow()
 	}
 }

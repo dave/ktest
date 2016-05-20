@@ -115,6 +115,11 @@ func (a *Assertions) HasError(theError error, expectedId string, msgAndArgs ...i
 	HasError(a.t, theError, expectedId, msgAndArgs...)
 }
 
+// HasError works with the kerr package to test for a specific error on the error stack, but the error is expected to come from an external package so tooling shouldn't expect to find the error thrown.
+func (a *Assertions) HasErrorExternal(theError error, expectedId string, msgAndArgs ...interface{}) {
+	HasErrorExternal(a.t, theError, expectedId, msgAndArgs...)
+}
+
 // Implements asserts that an object is implemented by the specified interface.
 //
 //    a.Implements((*MyInterface)(nil), new(MyObject), "MyObject")
@@ -151,6 +156,11 @@ func (a *Assertions) InEpsilonSlice(expected interface{}, actual interface{}, ep
 // IsError works with the kerr package to test for a specific error
 func (a *Assertions) IsError(theError error, expectedId string, msgAndArgs ...interface{}) {
 	IsError(a.t, theError, expectedId, msgAndArgs...)
+}
+
+// IsError works with the kerr package to test for a specific error, but the error is expected to come from an external package so tooling shouldn't expect to find the error thrown.
+func (a *Assertions) IsErrorExternal(theError error, expectedId string, msgAndArgs ...interface{}) {
+	IsErrorExternal(a.t, theError, expectedId, msgAndArgs...)
 }
 
 // IsType asserts that the specified objects are of the same type.
