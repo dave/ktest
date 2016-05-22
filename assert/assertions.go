@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 	"unicode"
 	"unicode/utf8"
@@ -1048,4 +1049,48 @@ func HasError(t TestingT, theError error, expectedId string, msgAndArgs ...inter
 		}
 	}
 	return Fail(t, fmt.Sprintf("Didn't find error %s on stack:\n%s", expectedId, theError), msgAndArgs...)
+}
+
+func WaitFor(t TestingT, c chan struct{}, shouldBeOpen bool, msgAndArgs ...interface{}) bool {
+	select {
+	case _, open := <-c:
+		if open != shouldBeOpen {
+			return Fail(t, "Chan signalled, but not in correct state.", msgAndArgs...)
+		}
+		return true
+	case <-time.After(time.Millisecond * 50):
+		return Fail(t, "Chan did not signal after 50ms timeout.", msgAndArgs...)
+	}
+	panic("should not get here")
+}
+
+func WaitForError(t TestingT, c chan error, errorId string, msgAndArgs ...interface{}) bool {
+	select {
+	case err, open := <-c:
+		if !open {
+			return Fail(t, "Chan closed.", msgAndArgs...)
+		}
+		if err == nil {
+			return Fail(t, "Error is nil.", msgAndArgs...)
+		}
+		return IsError(t, err, errorId, msgAndArgs...)
+	case <-time.After(time.Millisecond * 50):
+		return Fail(t, "No error returned after 50ms timeout.", msgAndArgs...)
+	}
+	panic("should not get here")
+}
+
+func WaitForGroup(t TestingT, wg *sync.WaitGroup, msgAndArgs ...interface{}) bool {
+	c := make(chan struct{})
+	go func() {
+		defer close(c)
+		wg.Wait()
+	}()
+	select {
+	case <-c:
+		return true
+	case <-time.After(50 * time.Millisecond):
+		return Fail(t, "Waitgroup did not finish after 50ms timeout.", msgAndArgs...)
+	}
+	panic("should not get here")
 }

@@ -6,6 +6,7 @@
 package assert
 
 import (
+	sync "sync"
 	time "time"
 )
 
@@ -302,6 +303,21 @@ func (a *Assertions) Regexp(rx interface{}, str interface{}, msgAndArgs ...inter
 // Returns whether the assertion was successful (true) or not (false).
 func (a *Assertions) True(value bool, msgAndArgs ...interface{}) bool {
 	return True(a.t, value, msgAndArgs...)
+}
+
+//
+func (a *Assertions) WaitFor(c chan struct{}, shouldBeOpen bool, msgAndArgs ...interface{}) bool {
+	return WaitFor(a.t, c, shouldBeOpen, msgAndArgs...)
+}
+
+//
+func (a *Assertions) WaitForError(c chan error, errorId string, msgAndArgs ...interface{}) bool {
+	return WaitForError(a.t, c, errorId, msgAndArgs...)
+}
+
+//
+func (a *Assertions) WaitForGroup(wg *sync.WaitGroup, msgAndArgs ...interface{}) bool {
+	return WaitForGroup(a.t, wg, msgAndArgs...)
 }
 
 // WithinDuration asserts that the two times are within duration delta of each other.

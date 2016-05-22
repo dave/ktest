@@ -6,6 +6,7 @@
 package require
 
 import (
+	sync "sync"
 	time "time"
 
 	assert "github.com/davelondon/ktest/assert"
@@ -372,6 +373,27 @@ func Regexp(t TestingT, rx interface{}, str interface{}, msgAndArgs ...interface
 // Returns whether the assertion was successful (true) or not (false).
 func True(t TestingT, value bool, msgAndArgs ...interface{}) {
 	if !assert.True(t, value, msgAndArgs...) {
+		t.FailNow()
+	}
+}
+
+//
+func WaitFor(t TestingT, c chan struct{}, shouldBeOpen bool, msgAndArgs ...interface{}) {
+	if !assert.WaitFor(t, c, shouldBeOpen, msgAndArgs...) {
+		t.FailNow()
+	}
+}
+
+//
+func WaitForError(t TestingT, c chan error, errorId string, msgAndArgs ...interface{}) {
+	if !assert.WaitForError(t, c, errorId, msgAndArgs...) {
+		t.FailNow()
+	}
+}
+
+//
+func WaitForGroup(t TestingT, wg *sync.WaitGroup, msgAndArgs ...interface{}) {
+	if !assert.WaitForGroup(t, wg, msgAndArgs...) {
 		t.FailNow()
 	}
 }
