@@ -26,7 +26,7 @@ import (
 )
 
 var (
-	pkg       = flag.String("assert-path", "github.com/davelondon/ktest/assert", "Path to the assert package")
+	pkg       = flag.String("assert-path", "github.com/dave/ktest/assert", "Path to the assert package")
 	outputPkg = flag.String("output-package", "", "package for the resulting code")
 	tmplFile  = flag.String("template", "", "What file to load the function template from")
 	out       = flag.String("out", "", "What file to write the source code to")
@@ -269,7 +269,7 @@ func (f *testFunc) CommentWithoutT(receiver string) string {
 }
 
 var headerTemplate = `/*
-* CODE GENERATED AUTOMATICALLY WITH github.com/davelondon/ktest/_codegen
+* CODE GENERATED AUTOMATICALLY WITH github.com/dave/ktest/_codegen
 * THIS FILE MUST NOT BE EDITED BY HAND
 */
 

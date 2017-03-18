@@ -15,8 +15,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/dave/kerr"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/davelondon/kerr"
 	"github.com/pmezard/go-difflib/difflib"
 )
 
@@ -140,7 +140,7 @@ func getWhitespaceString() string {
 
 	_, file, line, ok := runtime.Caller(1)
 	if !ok {
-		// ke: {"block": {"notest": true}}
+		// notest
 		return ""
 	}
 	parts := strings.Split(file, "/")

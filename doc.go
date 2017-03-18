@@ -10,7 +10,7 @@ package ktest
 // blank imports help docs.
 import (
 	// assert package
-	_ "github.com/davelondon/ktest/assert"
+	_ "github.com/dave/ktest/assert"
 	// mock package
-	_ "github.com/davelondon/ktest/mock"
+	_ "github.com/dave/ktest/mock"
 )

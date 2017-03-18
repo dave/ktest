@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/davelondon/kerr"
+	"github.com/dave/kerr"
 )
 
 func TestIsError(t *testing.T) {

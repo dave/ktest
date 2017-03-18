@@ -1,5 +1,5 @@
 /*
-* CODE GENERATED AUTOMATICALLY WITH github.com/davelondon/ktest/_codegen
+* CODE GENERATED AUTOMATICALLY WITH github.com/dave/ktest/_codegen
 * THIS FILE MUST NOT BE EDITED BY HAND
  */
 

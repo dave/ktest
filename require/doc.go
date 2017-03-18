@@ -6,7 +6,7 @@
 // The following is a complete example using require in a standard test function:
 //    import (
 //      "testing"
-//      "github.com/davelondon/ktest/require"
+//      "github.com/dave/ktest/require"
 //    )
 //
 //    func TestSomething(t *testing.T) {

@@ -3,7 +3,7 @@ package ktest
 import (
 	"testing"
 
-	"github.com/davelondon/ktest/assert"
+	"github.com/dave/ktest/assert"
 )
 
 func TestImports(t *testing.T) {

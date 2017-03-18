@@ -7,7 +7,7 @@ Forked from github.com/stretchr/testify
 ktest - Thou Shalt Write Tests
 ==============================
 
-[![Build Status](https://travis-ci.org/davelondon/ktest.svg)](https://travis-ci.org/davelondon/ktest)
+[![Build Status](https://travis-ci.org/dave/ktest.svg)](https://travis-ci.org/dave/ktest)
 
 Go code (golang) set of packages that provide many tools for testifying that your code will behave as you intend.
 
@@ -22,13 +22,13 @@ Get started:
 
   * Install ktest with [one line of code](#installation), or [update it with another](#staying-up-to-date)
   * For an introduction to writing test code in Go, see http://golang.org/doc/code.html#Testing
-  * Check out the API Documentation http://godoc.org/github.com/davelondon/ktest
+  * Check out the API Documentation http://godoc.org/github.com/dave/ktest
   * To make your testing life easier, check out our other project, [gorc](http://github.com/stretchr/gorc)
   * A little about [Test-Driven Development (TDD)](http://en.wikipedia.org/wiki/Test-driven_development)
 
 
 
-[`assert`](http://godoc.org/github.com/davelondon/ktest/assert "API documentation") package
+[`assert`](http://godoc.org/github.com/dave/ktest/assert "API documentation") package
 -------------------------------------------------------------------------------------------
 
 The `assert` package provides some helpful methods that allow you to write better test code in Go.
@@ -44,7 +44,7 @@ package yours
 
 import (
   "testing"
-  "github.com/davelondon/ktest/assert"
+  "github.com/dave/ktest/assert"
 )
 
 func TestSomething(t *testing.T) {
@@ -80,7 +80,7 @@ package yours
 
 import (
   "testing"
-  "github.com/davelondon/ktest/assert"
+  "github.com/dave/ktest/assert"
 )
 
 func TestSomething(t *testing.T) {
@@ -105,14 +105,14 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-[`require`](http://godoc.org/github.com/davelondon/ktest/require "API documentation") package
+[`require`](http://godoc.org/github.com/dave/ktest/require "API documentation") package
 ---------------------------------------------------------------------------------------------
 
 The `require` package provides same global functions as the `assert` package, but instead of returning a boolean result they terminate current test.
 
 See [t.FailNow](http://golang.org/pkg/testing/#T.FailNow) for details.
 
-[`mock`](http://godoc.org/github.com/davelondon/ktest/mock "API documentation") package
+[`mock`](http://godoc.org/github.com/dave/ktest/mock "API documentation") package
 ----------------------------------------------------------------------------------------
 
 The `mock` package provides a mechanism for easily writing mock objects that can be used in place of real objects when writing test code.
@@ -124,7 +124,7 @@ package yours
 
 import (
   "testing"
-  "github.com/davelondon/ktest/mock"
+  "github.com/dave/ktest/mock"
 )
 
 /*
@@ -174,7 +174,7 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-For more information on how to write mock code, check out the [API documentation for the `mock` package](http://godoc.org/github.com/davelondon/ktest/mock).
+For more information on how to write mock code, check out the [API documentation for the `mock` package](http://godoc.org/github.com/dave/ktest/mock).
 
 You can use the [mockery tool](http://github.com/vektra/mockery) to autogenerate the mock code against an interface as well, making using mocks much quicker.
 
@@ -183,12 +183,12 @@ Installation
 
 To install ktest, use `go get`:
 
-    * Latest version: go get github.com/davelondon/ktest
+    * Latest version: go get github.com/dave/ktest
 
 This will then make the following packages available to you:
 
-    github.com/davelondon/ktest/assert
-    github.com/davelondon/ktest/mock
+    github.com/dave/ktest/assert
+    github.com/dave/ktest/mock
 
 Import the `ktest/assert` package into your code using this template:
 
@@ -197,7 +197,7 @@ package yours
 
 import (
   "testing"
-  "github.com/davelondon/ktest/assert"
+  "github.com/dave/ktest/assert"
 )
 
 func TestSomething(t *testing.T) {
@@ -212,7 +212,7 @@ func TestSomething(t *testing.T) {
 Staying up to date
 ==================
 
-To update ktest to the latest version, use `go get -u github.com/davelondon/ktest`.
+To update ktest to the latest version, use `go get -u github.com/dave/ktest`.
 
 ------
 

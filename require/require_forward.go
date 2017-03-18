@@ -1,5 +1,5 @@
 /*
-* CODE GENERATED AUTOMATICALLY WITH github.com/davelondon/ktest/_codegen
+* CODE GENERATED AUTOMATICALLY WITH github.com/dave/ktest/_codegen
 * THIS FILE MUST NOT BE EDITED BY HAND
  */
 
@@ -9,7 +9,7 @@ import (
 	sync "sync"
 	time "time"
 
-	assert "github.com/davelondon/ktest/assert"
+	assert "github.com/dave/ktest/assert"
 )
 
 // Condition uses a Comparison to assert a complex condition.
